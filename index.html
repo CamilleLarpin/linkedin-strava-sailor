@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SailProof - One Verified Sailing Resume: Stop Proving Yourself, Start Sailing.</title>
+    <meta name="description" content="Build your verified sailing resume once, use it everywhere. From crew positions to yacht charters and race teams.">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #3F00FF;
+            --primary-blue-dark: #0000FF;
+            --secondary-blue: #5B00FF;
+            --text-dark: #1a1a1a;
+            --text-gray: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f0fe 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+        /* Buttons */
+        .btn {
+            padding: 14px 32px;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text p {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            line-height: 1.7;
+            order: 1;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            order: 2;
+        }
+
+        .profile-mockup {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .profile-info h3 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .profile-info p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .verified-badges {
+            display: grid;
+            gap: 12px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .badge-icon {
+            width: 24px;
+            height: 24px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .badge-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-gray);
+        }
+
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .pain-point {
+            padding: 32px;
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .pain-point:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pain-point-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .pain-point h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .pain-point p {
+            color: var(--text-gray);
+            font-size: 16px;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 80px 0;
+        }
+
+        .solution-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .use-cases-box {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .use-cases-box h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+        }
+
+        .use-cases-list {
+            list-style: none;
+        }
+
+        .use-case {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-light);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .use-case:last-child {
+            border-bottom: none;
+        }
+
+        .use-case-icon {
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        .tagline {
+            margin-top: 24px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            border-radius: var(--radius);
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 32px 20px;
+            background: var(--bg-light);
+            border-radius: var(--radius);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: scale(1.05);
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* Commitment Section */
+        .commitment {
+            padding: 80px 0;
+        }
+
+        .commitment-box {
+            background: var(--white);
+            padding: 60px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .commitment-box h2 {
+            font-size: 38px;
+            margin-bottom: 24px;
+        }
+
+        .commitment-box > p {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 40px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        .commitment-cta {
+            margin-bottom: 20px;
+        }
+
+        .secondary-link {
+            color: var(--text-gray);
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* Menu Button */
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .menu-btn:hover {
+            color: var(--primary-blue-dark);
+        }
+
+        .menu-btn i {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 73px;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius) 0 0 var(--radius);
+            padding: 24px;
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 99;
+            min-width: 220px;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            background: var(--bg-light);
+            color: var(--primary-blue);
+        }
+
+        .hero-text .blue-text {
+            color: var(--primary-blue);
+        }
+
+        .hero-text .cta-text {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: block;
+            margin-top: 8px;
+        }
+
+        .hero-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-content {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-text .cta-text {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+            }
+
+            .hero-text .cta-text {
+                font-size: 24px;
+            }
+
+            .pain-points {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 32px;
+            }
+
+            .commitment-box {
+                padding: 40px 24px;
+            }
+
+            .commitment-box h2 {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text p {
+                font-size: 16px;
+            }
+
+            .hero-text .cta-text {
+                font-size: 20px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i data-lucide="anchor"></i>
+                    SailProof
+                </a>
+                <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#problem" onclick="closeMenu()">Problem</a>
+            <a href="#solution" onclick="closeMenu()">Solution</a>
+            <a href="#how-it-works" onclick="closeMenu()">How It Works</a>
+            <a href="#founding-sailors" onclick="closeMenu()">Founding Sailors</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text hero-text-wrapper">
+                    <p>Whether you're looking for crew positions, yacht charters, or race teams—<span class="blue-text">captains and boat owners choose sailors they can trust</span>.<br><br><span class="cta-text">Build your verified sailing resume once, use it everywhere.</span></p>
+                    <div class="hero-cta">
+                        <button class="btn btn-primary" data-tally-open="wkMzrR" data-tally-layout="modal" data-tally-width="600">Become a Founding Sailor</button>
+                        <button class="btn btn-secondary" data-tally-open="3xOz0d" data-tally-layout="modal" data-tally-width="600">Join Regular Waitlist</button>
+                    </div>
+                </div>
+                <div class="profile-mockup">
+                    <div class="profile-header">
+                        <div class="profile-avatar">AS</div>
+                        <div class="profile-info">
+                            <h3>Alex Sullivan</h3>
+                            <p>Verified Sailor • 12,500 nm</p>
+                        </div>
+                    </div>
+                    <div class="verified-badges">
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="badge-text">8,500 nm Atlantic Crossings</div>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="badge-text">RYA Yachtmaster Ocean</div>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="badge-text">5 Captain References</div>
+                        </div>
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="badge-text">15 Verified Passages</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="section-header">
+                <h2>The trust problem every sailor faces</h2>
+            </div>
+            <div class="pain-points">
+                <div class="pain-point">
+                    <div class="pain-point-icon">
+                        <i data-lucide="file-text"></i>
+                    </div>
+                    <h3>Proving your experience over and over</h3>
+                    <p>Every application means retelling your story, hunting down old logbooks, and hoping someone believes you.</p>
+                </div>
+                <div class="pain-point">
+                    <div class="pain-point-icon">
+                        <i data-lucide="shield-alert"></i>
+                    </div>
+                    <h3>Boat owners can't verify you're qualified</h3>
+                    <p>They're taking a huge risk on unverified sailors. No wonder they hesitate to say yes.</p>
+                </div>
+                <div class="pain-point">
+                    <div class="pain-point-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <h3>Miss opportunities</h3>
+                    <p>While you're scrambling to prove yourself, the spot goes to someone who was ready.</p>
+                </div>
+                <div class="pain-point">
+                    <div class="pain-point-icon">
+                        <i data-lucide="layers"></i>
+                    </div>
+                    <h3>Your experience is scattered</h3>
+                    <p>Photos on Instagram, logbook entries in notebooks, certifications in a drawer somewhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>One profile. Every sailing opportunity.</h2>
+            </div>
+            <div class="solution-content">
+                <div>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">Verified sea miles & boat types</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">Digital logbook validation</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">References from previous captains</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">Certification verification</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">Shareable link for any application</div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-icon">
+                                <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                            </div>
+                            <div class="feature-text">Portfolio of passages, races, and deliveries</div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="use-cases-box">
+                        <h3>Perfect for:</h3>
+                        <ul class="use-cases-list">
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Finding crew positions
+                            </li>
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Yacht charter applications
+                            </li>
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Joining race teams
+                            </li>
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Yacht delivery jobs
+                            </li>
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Sailing club memberships
+                            </li>
+                            <li class="use-case">
+                                <i data-lucide="circle-check" class="use-case-icon"></i>
+                                Building your sailing resume
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tagline">
+                        Think LinkedIn meets Strava for sailors
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How it works</h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create your profile</h3>
+                    <p>Complete sailing profile in just 10 minutes</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>We verify your experience</h3>
+                    <p>Our team validates your sea miles and credentials</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Share one link</h3>
+                    <p>Use your profile for every sailing opportunity</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get accepted faster</h3>
+                    <p>Verified sailors get chosen by captains and boat owners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commitment Section -->
+    <section class="commitment" id="founding-sailors">
+        <div class="container">
+            <div class="commitment-box">
+                <h2>Join the Initiative</h2>
+                <p>We're looking for 100 founding sailors who will help shape this platform. By committing early, you'll get exclusive benefits and directly influence how we verify and showcase sailing experience.</p>
+                <ul class="benefits-list">
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>Lifetime free premium features</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>First access to the platform</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>Direct input on features and verification process</div>
+                    </li>
+                    <li class="benefit-item">
+                        <div class="benefit-icon">
+                            <i data-lucide="check" style="width: 16px; height: 16px;"></i>
+                        </div>
+                        <div>Founding Sailor badge on your profile</div>
+                    </li>
+                </ul>
+                <div class="commitment-cta">
+                    <button class="btn btn-primary" data-tally-open="wkMzrR" data-tally-layout="modal" data-tally-width="600">Become a Founding Sailor</button>
+                </div>
+                <p class="secondary-link">Just want updates?</p>
+                <button class="btn btn-secondary" data-tally-open="3xOz0d" data-tally-layout="modal" data-tally-width="600">Join Regular Waitlist</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">SailProof</div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Menu toggle functions
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const menuBtn = document.querySelector('.menu-btn');
+            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.pain-point, .feature-item, .step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
