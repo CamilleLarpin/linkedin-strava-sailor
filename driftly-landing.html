@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driftly - Sail Effortlessly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #e8f0fe 100%);
+            min-height: 100vh;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+            position: relative;
+        }
+        
+        .logo-icon::before {
+            content: '〰️';
+            position: absolute;
+            background: linear-gradient(to bottom, white 0%, white 45%, #fbbf24 55%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.3));
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: #1e40af;
+        }
+        
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 48px 80px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .wave-decoration {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 120px;
+            opacity: 0.08;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+        
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            color: #475569;
+            margin-bottom: 48px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 8px 24px rgba(30, 58, 138, 0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 12px 32px rgba(30, 58, 138, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1e3a8a;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        
+        footer {
+            background: white;
+            padding: 32px 48px;
+            margin-top: 80px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .footer-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 24px;
+            }
+            
+            .hero {
+                padding: 80px 24px 60px;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span class="logo-text">driftly</span>
+        </div>
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#captains">For Captains</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="wave-decoration">〰️</div>
+        <h1>
+            Sea is calling. <span class="gradient-text">Set Sail.</span>
+        </h1>
+        <p class="hero-subtitle">
+            Sailing made simple: Browse seamlessly. Pay only what you book. And just sail.
+        </p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-secondary">Sign In</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">driftly</div>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
